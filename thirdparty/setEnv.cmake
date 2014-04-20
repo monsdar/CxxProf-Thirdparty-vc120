@@ -38,7 +38,7 @@ set( CMAKE_DEBUG_POSTFIX "_debug")  #This is the Postfix used for Debug libs
 
 #set the pathes where to search for Thirdparty
 GET_FILENAME_COMPONENT(SCRIPT_DIR ${CMAKE_CURRENT_LIST_FILE} PATH)
-set( THIRDPARTY_DIR ${SCRIPT_DIR}/../thirdparty/)
+set( THIRDPARTY_DIR ${SCRIPT_DIR})
 set( SOURCE_DIR ${SCRIPT_DIR}/../src/)
 
 #Boost
