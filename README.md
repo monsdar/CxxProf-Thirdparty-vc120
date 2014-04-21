@@ -1,13 +1,18 @@
 Brofiler-Thirdparty-vc120
 =========================
 
-This repo hosts the Thirdparty needed to build Brofiler with Microsoft Visual Compiler v120 (Visual Studio 2013).
-
 Main project: [Brofiler](https://github.com/monsdar/Brofiler)
 
-* [What is Brofiler?](https://github.com/monsdar/Brofiler/wiki/What-is-Brofiler%3F)
-* [Projects using Brofiler (Screenshots)](https://github.com/monsdar/Brofiler/wiki/Projects-using-Brofiler-(Screenshots))
-* [Architecture Overview](https://github.com/monsdar/Brofiler/wiki/Architecture-Overview)
-* [How to integrate Brofiler into your project](https://github.com/monsdar/Brofiler/wiki/How-to-integrate-Brofiler-into-your-project)
-* [DevGuide: How to compile Brofiler](https://github.com/monsdar/Brofiler/wiki/DevGuide:-How-to-compile-Brofiler)
-* [Comparison of existing Profilers](https://github.com/monsdar/Brofiler/wiki/Comparison-of-existing-Profilers)
+###Contained Thirdparty
+
+Thirdparty | Version
+--- | ---
+Boost | 1.55.0
+CMake | 2.8.12.2
+Pluma | 1.1
+sqlite3 | amalgamation-3080403
+sqlite3cc | 0.1.1
+ZeroMQ | 4.0.4
+
+* Compiled for 32bit
+* Compiled for Microsoft Visual Compiler v120 (Visual Studio 2013)
