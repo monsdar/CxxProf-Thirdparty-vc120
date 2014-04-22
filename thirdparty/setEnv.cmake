@@ -44,11 +44,12 @@ set( SOURCE_DIR ${SCRIPT_DIR}/../src/)
 #Boost
 IF(NOT Boost_FOUND)
     set(BOOST_ROOT ${THIRDPARTY_DIR}/Boost)
-    set(Boost_USE_STATIC_LIBS OFF)
+    set(Boost_USE_STATIC_LIBS ON)
     set(Boost_USE_STATIC_RUNTIME OFF)
     set(Boost_USE_MULTITHREADED ON)
-    add_definitions( -DBOOST_ALL_NO_LIB )   #needed for VisualStudio
-    add_definitions( -DBOOST_ALL_DYN_LINK ) #needed for VisualStudio
+    set(Boost_DEBUG ON)
+    #add_definitions( -DBOOST_ALL_NO_LIB )   #needed for VisualStudio
+    #add_definitions( -DBOOST_ALL_DYN_LINK ) #needed for VisualStudio
     find_package(Boost 1.55.0 REQUIRED COMPONENTS filesystem serialization system unit_test_framework thread date_time chrono)
 ENDIF(NOT Boost_FOUND)
 
