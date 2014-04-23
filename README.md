@@ -1,7 +1,7 @@
-Brofiler-Thirdparty-vc120
+CxxProf-Thirdparty-vc120
 =========================
 
-Main project: [Brofiler](https://github.com/monsdar/Brofiler)
+Main project: [CxxProf](https://github.com/monsdar/CxxProf)
 
 ###Contained Thirdparty
 
