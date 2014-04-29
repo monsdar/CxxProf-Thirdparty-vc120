@@ -24,6 +24,16 @@
 #define SQLITE3CC_COMMAND_H_
 
 
+
+#ifndef Sqlite3cc_EXPORT
+#ifdef LIBEXPORT
+#define Sqlite3cc_EXPORT __declspec( dllexport )
+#else
+#define Sqlite3cc_EXPORT __declspec( dllimport )
+#endif //LIBEXPORT
+#endif //Sqlite3cc_EXPORT
+
+
 #include <sqlite3cc/basic_statement.h>
 
 
@@ -37,7 +47,7 @@ namespace sqlite
  * the statement class with the addition of an exec() method to execute the
  * command.
  */
-class command
+    class Sqlite3cc_EXPORT command
 	:
 	public detail::basic_statement
 {
@@ -156,7 +166,7 @@ namespace detail
 
 // template specialisations for detail::basic_statement::operator <<()
 template< >
-basic_statement &basic_statement::operator << < detail::exec_t >(
+basic_statement Sqlite3cc_EXPORT &basic_statement::operator << < detail::exec_t >(
 	const detail::exec_t & );
 
 

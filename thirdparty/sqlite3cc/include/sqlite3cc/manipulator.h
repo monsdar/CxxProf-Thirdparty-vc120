@@ -23,6 +23,13 @@
 #ifndef SQLITE3CC_MANIPULATOR_H_
 #define SQLITE3CC_MANIPULATOR_H_
 
+#ifndef Sqlite3cc_EXPORT
+#ifdef LIBEXPORT
+#define Sqlite3cc_EXPORT __declspec( dllexport )
+#else
+#define Sqlite3cc_EXPORT __declspec( dllimport )
+#endif //LIBEXPORT
+#endif //Sqlite3cc_EXPORT
 
 namespace sqlite
 {
@@ -61,7 +68,7 @@ extern detail::exec_t exec;
  *
  * @param index the new index
  */
-detail::set_index_t set_index(
+detail::set_index_t Sqlite3cc_EXPORT set_index(
 	unsigned int index );
 
 

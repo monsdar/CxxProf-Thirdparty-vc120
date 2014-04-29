@@ -23,6 +23,13 @@
 #ifndef SQLITE3CC_TRANSACTION_H_
 #define SQLITE3CC_TRANSACTION_H_
 
+#ifndef Sqlite3cc_EXPORT
+#ifdef LIBEXPORT
+#define Sqlite3cc_EXPORT __declspec( dllexport )
+#else
+#define Sqlite3cc_EXPORT __declspec( dllimport )
+#endif //LIBEXPORT
+#endif //Sqlite3cc_EXPORT
 
 #include <boost/utility.hpp>
 #include <string>
@@ -41,7 +48,7 @@ namespace detail
 	/**
 	 * A basic (default, deferred) transaction.
 	 */
-	class basic_transaction
+    class Sqlite3cc_EXPORT basic_transaction
 		:
 		private boost::noncopyable
 	{
@@ -106,7 +113,7 @@ typedef detail::basic_transaction deferred_transaction;
 /**
  * An immediate transaction.
  */
-class immediate_transaction
+class Sqlite3cc_EXPORT immediate_transaction
 	:
 	public detail::basic_transaction
 {
@@ -140,7 +147,7 @@ public:
 /**
  * An exclusive transaction.
  */
-class exclusive_transaction
+class Sqlite3cc_EXPORT exclusive_transaction
 	:
 	public detail::basic_transaction
 {
@@ -174,7 +181,7 @@ public:
 /**
  * A recursive transaction, allowing transactions to be nested.
  */
-class recursive_transaction
+class Sqlite3cc_EXPORT recursive_transaction
 	:
 	public detail::basic_transaction
 {
@@ -214,7 +221,7 @@ public:
 protected:
 
 	/* this transaction's savepoint name */
-	std::string _sp_name;
+    std::string _sp_name;
 
 };
 
@@ -307,6 +314,15 @@ protected:
 
 };
 
+//NOTE: It is needed to instantiate the template here with dllexport in order to have it added to the class.
+//      Read the following to get more information:
+//      http://stackoverflow.com/questions/495021/why-can-templates-only-be-implemented-in-the-header-file/495056#495056
+//      http://www.parashift.com/c++-faq-lite/templates-defn-vs-decl.html
+//
+template class Sqlite3cc_EXPORT transaction_guard<deferred_transaction>;
+template class Sqlite3cc_EXPORT transaction_guard<exclusive_transaction>;
+template class Sqlite3cc_EXPORT transaction_guard<immediate_transaction>;
+template class Sqlite3cc_EXPORT transaction_guard<recursive_transaction>;
 
 } // namespace sqlite
 

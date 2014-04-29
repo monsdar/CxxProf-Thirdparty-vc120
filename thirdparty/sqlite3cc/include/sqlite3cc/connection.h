@@ -23,6 +23,13 @@
 #ifndef SQLITE3CC_CONNECTION_H_
 #define SQLITE3CC_CONNECTION_H_
 
+#ifndef Sqlite3cc_EXPORT
+#ifdef LIBEXPORT
+#define Sqlite3cc_EXPORT __declspec( dllexport )
+#else
+#define Sqlite3cc_EXPORT __declspec( dllimport )
+#endif //LIBEXPORT
+#endif //Sqlite3cc_EXPORT
 
 #include <sqlite3.h>
 #include <boost/utility.hpp>
@@ -42,7 +49,7 @@ class command;
 class query;
 
 
-class connection
+class Sqlite3cc_EXPORT connection
 	:
 	private boost::noncopyable
 {

@@ -23,6 +23,13 @@
 #ifndef SQLITE3CC_UTIL_H_
 #define SQLITE3CC_UTIL_H_
 
+#ifndef Sqlite3cc_EXPORT
+#ifdef LIBEXPORT
+#define Sqlite3cc_EXPORT __declspec( dllexport )
+#else
+#define Sqlite3cc_EXPORT __declspec( dllimport )
+#endif //LIBEXPORT
+#endif //Sqlite3cc_EXPORT
 
 #include <sqlite3.h>
 
@@ -38,7 +45,7 @@ namespace sqlite
  * @returns sqlite threading mode
  * @see sqlite3_threadsafe()
  */
-int threadsafe();
+    int threadsafe();
 
 
 } // namespace sqlite
@@ -50,7 +57,7 @@ extern "C" {
 	 * Convenience function, so that the presence of libsqlite3cc can be
 	 * detected easily from autoconf's AC_CHECK_LIB() macro.
 	 */
-	void libsqlite3cc_is_present( void );
+    void libsqlite3cc_is_present(void);
 
 } // extern "C"
 

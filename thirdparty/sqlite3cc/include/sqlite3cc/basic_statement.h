@@ -24,6 +24,14 @@
 #define SQLITE3CC_BASIC_STATEMENT_H_
 
 
+#ifndef Sqlite3cc_EXPORT
+    #ifdef LIBEXPORT
+        #define Sqlite3cc_EXPORT __declspec( dllexport )
+    #else
+        #define Sqlite3cc_EXPORT __declspec( dllimport )
+    #endif //LIBEXPORT
+#endif //Sqlite3cc_EXPORT
+
 #include <sqlite3.h>
 #include <boost/utility.hpp>
 #include <boost/lexical_cast.hpp>
@@ -52,7 +60,7 @@ namespace detail
  * both the command and the query classes, which should be used for those
  * purposes.  The basic_statement class its self has protected instantiation.
  */
-class basic_statement
+    class Sqlite3cc_EXPORT basic_statement
 {
 //______________________________________________________________________________
 //                                                                 instantiation
@@ -323,10 +331,10 @@ protected:
 
 // template specialisations for basic_statement::operator <<()
 template< >
-basic_statement &basic_statement::operator << < detail::null_t >(
+basic_statement Sqlite3cc_EXPORT &basic_statement::operator << < detail::null_t >(
 	const detail::null_t & );
 template< >
-basic_statement &basic_statement::operator << < detail::set_index_t >(
+basic_statement Sqlite3cc_EXPORT &basic_statement::operator << < detail::set_index_t >(
 	const detail::set_index_t &t );
 
 

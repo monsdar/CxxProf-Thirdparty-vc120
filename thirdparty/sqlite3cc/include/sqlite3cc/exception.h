@@ -24,6 +24,15 @@
 #define SQLITE3CC_EXCEPTION_H_
 
 
+#ifndef Sqlite3cc_EXPORT
+#ifdef LIBEXPORT
+#define Sqlite3cc_EXPORT __declspec( dllexport )
+#else
+#define Sqlite3cc_EXPORT __declspec( dllimport )
+#endif //LIBEXPORT
+#endif //Sqlite3cc_EXPORT
+
+
 #include <sqlite3.h>
 #include <stdexcept>
 
@@ -38,7 +47,7 @@ class connection;
 /**
  * Main (base) sqlite exception class.
  */
-class sqlite_error
+class Sqlite3cc_EXPORT sqlite_error
 	:
 	public std::exception
 {

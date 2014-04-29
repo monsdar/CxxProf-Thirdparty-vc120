@@ -23,17 +23,23 @@
 #ifndef SQLITE3CC_QUERY_H_
 #define SQLITE3CC_QUERY_H_
 
+#ifndef Sqlite3cc_EXPORT
+#ifdef LIBEXPORT
+#define Sqlite3cc_EXPORT __declspec( dllexport )
+#else
+#define Sqlite3cc_EXPORT __declspec( dllimport )
+#endif //LIBEXPORT
+#endif //Sqlite3cc_EXPORT
 
 #include <boost/iterator/iterator_facade.hpp>
 #include <sqlite3cc/basic_statement.h>
 #include <sqlite3cc/row.h>
 
-
 namespace sqlite
 {
 
 
-class query
+    class Sqlite3cc_EXPORT query
 	:
 	public detail::basic_statement
 {
@@ -123,7 +129,7 @@ public:
 	/**
 	 * Query iterator which can be used to obtain rows.
 	 */
-	class iterator
+    class Sqlite3cc_EXPORT iterator
 		:
 		public boost::iterator_facade< iterator, row,
 			boost::single_pass_traversal_tag, row >
@@ -131,12 +137,22 @@ public:
 	public:
 		explicit iterator( query &query, bool step );
 
+        //NOTE: This is a workaround for vc10, vc11 and vc12 compilers, which did not compile without
+        //      additional definitions of decrement() and advance(..)
+        //      Boost::program_options uses the same fix:
+        //      https://github.com/DanielaE/boost.program_options/commit/c5820c93c9e1e1402beadc579b79d5fd8eebf970
+        //
+        #if BOOST_WORKAROUND(_MSC_VER, <= 1800)
+            void decrement() {}
+            void advance(difference_type) {}
+        #endif //BOOST_WORKAROUND
+
 	private:
 		friend class boost::iterator_core_access;
 
-		row dereference() const;
-		void increment();
-		bool equal( iterator const &other ) const;
+        row dereference() const;
+        void increment();
+        bool equal(iterator const &other) const;
 
 		/** the current row */
 		row _row;

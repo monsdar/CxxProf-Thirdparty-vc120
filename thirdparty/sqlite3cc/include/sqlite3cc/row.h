@@ -23,6 +23,13 @@
 #ifndef SQLITE3CC_ROW_H_
 #define SQLITE3CC_ROW_H_
 
+#ifndef Sqlite3cc_EXPORT
+#ifdef LIBEXPORT
+#define Sqlite3cc_EXPORT __declspec( dllexport )
+#else
+#define Sqlite3cc_EXPORT __declspec( dllimport )
+#endif //LIBEXPORT
+#endif //Sqlite3cc_EXPORT
 
 #include <sqlite3.h>
 #include <boost/utility.hpp>
@@ -50,7 +57,7 @@ namespace detail {
  * query object, or until the parent query object is destructed.  This may
  * change in future versions.
  */
-class row
+class Sqlite3cc_EXPORT row
 {
 //______________________________________________________________________________
 //                                                                 instantiation
@@ -203,7 +210,7 @@ private:
 
 // template specialisations
 template< >
-row &row::operator >> < detail::null_t >(
+row Sqlite3cc_EXPORT &row::operator >> < detail::null_t >(
 	detail::null_t & );
 
 
